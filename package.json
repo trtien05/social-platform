@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon -r tsconfig-paths/register src/app.ts | .\\node_modules\\.bin\\bunyan"
+    "dev": "nodemon -r tsconfig-paths/register src/app.ts | .\\node_modules\\.bin\\bunyan",
+    "lint:check": "eslint \"src/**/*.ts\"",
+    "lint:fix": "eslint \"src/**/*.ts\" --fix",
+    "prettier:check": "prettier --check \"src/**/*.{ts,json}\"",
+    "prettier:fix": "prettier --write \"src/**/*.{ts,json}\""
   },
   "author": "",
   "license": "ISC",
@@ -32,6 +36,11 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/hpp": "^0.2.6",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
+    "eslint": "^8.35.0",
+    "eslint-config-prettier": "^8.6.0",
+    "prettier": "^2.8.4",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0"
   }

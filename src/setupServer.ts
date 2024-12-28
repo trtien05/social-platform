@@ -5,8 +5,8 @@ import helmet from 'helmet';
 import cookierSession from 'cookie-session';
 import compression from 'compression';
 import hpp from 'hpp';
-import HTTP_STATUS from 'http-status-codes'
-import 'express-async-errors'
+import HTTP_STATUS from 'http-status-codes';
+import 'express-async-errors';
 import { config } from './config';
 import { Server } from 'socket.io';
 import { createClient } from 'redis';
@@ -39,17 +39,19 @@ export class ChattyServer {
         name: 'session',
         keys: [config.SECRET_KEY_ONE!, config.SECRET_KEY_TWO!],
         maxAge: 24 * 7 * 360000,
-        secure: config.NODE_ENV !== 'development',
-      }),
+        secure: config.NODE_ENV !== 'development'
+      })
     );
     app.use(hpp());
     app.use(helmet());
-    app.use(cors({
-      origin: config.CLIENT_URL,
-      credentials: true,
-      optionsSuccessStatus: 200,
-      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    }));
+    app.use(
+      cors({
+        origin: config.CLIENT_URL,
+        credentials: true,
+        optionsSuccessStatus: 200,
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+      })
+    );
   }
 
   private standardMiddleware(app: Application): void {
@@ -72,10 +74,9 @@ export class ChattyServer {
       if (error instanceof CustomError) {
         return res.status(error.statusCode).json(error.serializeErrors());
       }
-      next()
+      next();
     });
   }
-
 
   private async startServer(app: Application): Promise<void> {
     try {
@@ -92,9 +93,9 @@ export class ChattyServer {
     const io: Server = new Server(httpServer, {
       cors: {
         origin: config.CLIENT_URL,
-        credentials: true,
-      },
-    })
+        credentials: true
+      }
+    });
     const pubClient = createClient({ url: config.REDIS_HOST });
     const subClient = pubClient.duplicate();
     await Promise.all([pubClient.connect(), subClient.connect()]);
@@ -103,11 +104,11 @@ export class ChattyServer {
   }
 
   private startHttpServer(httpServer: http.Server): void {
-    log.info("Server has started with process", process.pid);
+    log.info('Server has started with process', process.pid);
     httpServer.listen(SERVER_PORT, () => {
       log.info(`Server is running on port ${SERVER_PORT}`);
     });
   }
 
-  private socketIOConnection(socketIO: Server): void { }
+  private socketIOConnection(socketIO: Server): void {}
 }

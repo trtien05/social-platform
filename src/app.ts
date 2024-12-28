@@ -1,10 +1,9 @@
 import express, { Express } from 'express';
-import { ChattyServer } from './setupServer'
-import databaseConnection from './setupDatabase'
-import { config } from './config'
+import { ChattyServer } from './setupServer';
+import databaseConnection from './setupDatabase';
+import { config } from './config';
 
 class Application {
-
   public initialize(): void {
     this.loadConfig();
     databaseConnection();
