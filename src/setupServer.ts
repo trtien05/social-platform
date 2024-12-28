@@ -6,14 +6,14 @@ import cookierSession from 'cookie-session';
 import compression from 'compression';
 import hpp from 'hpp';
 import HTTP_STATUS from 'http-status-codes';
+import Logger from 'bunyan';
 import 'express-async-errors';
-import { config } from './config';
 import { Server } from 'socket.io';
 import { createClient } from 'redis';
 import { createAdapter } from '@socket.io/redis-adapter';
-import applicationRoutes from './routes';
-import { CustomError, IErrorResponse } from './shared/global/helpers/error-handler';
-import Logger from 'bunyan';
+import { config } from '@root/config';
+import applicationRoutes from '@root/routes';
+import { IErrorResponse, CustomError } from '@global/helpers/error-handler';
 
 const SERVER_PORT = 5000;
 const log: Logger = config.createLogger('server');
