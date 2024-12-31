@@ -32,6 +32,8 @@
       },
     ],
     "paths": {
+      "@user/*": ["src/features/user/*"],
+      "@auth/*": ["src/features/auth/*"],
       "@global/*": ["src/shared/global/*"],
       "@service/*": ["src/shared/services/*"],
       "@socket/*": ["src/shared/sockets/*"],
